@@ -868,27 +868,27 @@
     </section>
 
     <section id="contact">
-<div class="container">
+        <div class="container">
             <div class="contact-section">
                 <div class="section-header">
                     <div class="section-tag">Let's Connect</div>
                     <h2>Get In Touch</h2>
                     <p class="section-description">
                         I'm always open to discussing cybersecurity opportunities, research collaborations, 
-                        or sharing insights on the latest threats and defenses.
+                        or just sharing ideas about the latest threats and defenses.
                     </p>
                 </div>
                 
-                <!-- Contact Links -->
+                <!-- Contact Links (Phone Removed) -->
                 <div class="contact-links">
                     <a href="mailto:bendada.ouss01@gmail.com" class="contact-link">
-                        <span>Envelope</span> bendada.ouss01@gmail.com
+                        <span>✉️</span> bendada.ouss01@gmail.com
                     </a>
                     <a href="https://linkedin.com/in/oussama-bendada-a22a321b3/" target="_blank" class="contact-link">
-                        <span>LinkedIn</span> LinkedIn
+                        <span>💼</span> LinkedIn
                     </a>
                     <a href="https://github.com/oussben811" target="_blank" class="contact-link">
-                        <span>GitHub</span> GitHub
+                        <span>🐙</span> GitHub
                     </a>
                 </div>
 
@@ -923,19 +923,21 @@
                             <label for="message">Message</label>
                         </div>
                         
-                        <!-- Fixed Checkbox -->
-                        <div class="form-group checkbox-group">
-                            <label class="checkbox-label">
+                        <!-- Fixed Checkbox: Input BEFORE label -->
+                        <div class="form-row">
+                            <div class="form-group checkbox-group">
                                 <input type="checkbox" id="consent" name="consent" required>
-                                <span class="checkmark"></span>
-                                I consent to having this website store my submitted information
-                            </label>
+                                <label for="consent" class="checkbox-label">
+                                    <span class="checkmark"></span>
+                                    I consent to having this website store my submitted information
+                                </label>
+                            </div>
                         </div>
                         
                         <button type="submit" class="form-submit-btn">
                             <span class="btn-text">Send Message</span>
                             <span class="btn-loading" style="display: none;">Sending...</span>
-                            <span class="btn-icon">Send</span>
+                            <span class="btn-icon">✉️</span>
                         </button>
                     </form>
                     
@@ -943,7 +945,7 @@
                 </div>
 
                 <div style="margin-top: 2rem; font-size: 0.95rem; color: var(--text-secondary);">
-                    Location: Casablanca, Morocco
+                    📍 Casablanca, Morocco
                 </div>
             </div>
         </div>
@@ -953,7 +955,7 @@
         <div class="container">
             <p>
                 © <span id="year"></span> Oussama Bendada. 
-                Built with <span style="color: #e25555;">Heart</span> and a lot of <span style="color: var(--cyan);">security</span>.
+                Built with <span style="color: #e25555;">❤️</span> and a lot of <span style="color: var(--cyan);">security</span>.
             </p>
             <p style="margin-top: 0.5rem; font-size: 0.9rem;">
                 Inspired by modern dark-mode portfolios | Powered by HTML, CSS & passion for cybersecurity
@@ -1049,39 +1051,41 @@
             font-weight: 500;
         }
 
-        /* Fixed & Improved Checkbox */
+        /* Checkbox Group */
         .checkbox-group {
             margin-bottom: 1.5rem !important;
+            display: flex;
+            align-items: flex-start;
         }
 
         .checkbox-label {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
+            position: relative;
+            padding-left: 2.8rem;
             cursor: pointer;
             font-size: 0.9rem;
             color: var(--text-secondary);
             line-height: 1.5;
-            position: relative;
-            padding-left: 0;
+            display: block;
         }
 
         .checkbox-label input {
-            opacity: 0;
             position: absolute;
-            z-index: -1;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
         }
 
         .checkmark {
-            position: relative;
-            width: 20px;
-            height: 20px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 22px;
+            width: 22px;
             background: var(--bg-secondary);
-            border: 1.5px solid var(--border);
+            border: 2px solid var(--border);
             border-radius: 6px;
-            flex-shrink: 0;
             transition: all 0.3s ease;
-            margin-top: 0.15rem;
         }
 
         .checkbox-label input:checked ~ .checkmark {
@@ -1089,19 +1093,24 @@
             border-color: var(--purple);
         }
 
-        .checkbox-label input:checked ~ .checkmark::after {
-            content: 'Check';
+        .checkmark:after {
+            content: "";
             position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-weight: bold;
-            font-size: 13px;
+            display: none;
         }
 
-        .checkbox-label:hover .checkmark {
-            border-color: var(--purple);
+        .checkbox-label input:checked ~ .checkmark:after {
+            display: block;
+        }
+
+        .checkbox-label .checkmark:after {
+            left: 7px;
+            top: 3px;
+            width: 6px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
         }
 
         .form-submit-btn {
@@ -1172,7 +1181,19 @@
             }
 
             .checkbox-label {
-                font-size: 0.85rem;
+                padding-left: 2.5rem;
+            }
+
+            .checkmark {
+                height: 20px;
+                width: 20px;
+            }
+
+            .checkbox-label .checkmark:after {
+                left: 6px;
+                top: 2px;
+                width: 5px;
+                height: 9px;
             }
         }
     </style>
@@ -1268,19 +1289,15 @@
             }
         }
 
-        // Input floating label fix
+        // Input animations
         document.querySelectorAll('.form-group input, .form-group textarea').forEach(input => {
-            const updateLabel = () => {
-                if (input.value) {
-                    input.classList.add('not-empty');
+            input.addEventListener('blur', function() {
+                if (this.value !== '') {
+                    this.classList.add('filled');
                 } else {
-                    input.classList.remove('not-empty');
+                    this.classList.remove('filled');
                 }
-            };
-            input.addEventListener('input', updateLabel);
-            input.addEventListener('focus', updateLabel);
-            input.addEventListener('blur', updateLabel);
-            updateLabel();
+            });
         });
     </script>
 </body>
